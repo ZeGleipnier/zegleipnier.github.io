@@ -15,7 +15,6 @@
     --paper-warm: #EDE9E2;
     --rule: #D4CFC7;
     --accent-1: #1A3A5C;
-    --accent-2: #8B2E00;
     --accent-3: #1A4D35;
     --gold: #C4973A;
     --ai: #6C63FF;
@@ -34,19 +33,20 @@
 
   /* ── HERO ── */
   .hero {
-    min-height: 100vh;
+    min-height: 60vh;
     display: grid;
     grid-template-columns: 1fr 1fr;
     position: relative;
     overflow: hidden;
   }
 
+  /* Left panel: name top, content strategy label */
   .hero-left {
     background: var(--ink);
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    padding: 5rem 4rem;
+    justify-content: flex-start;
+    padding: 3rem 4rem;
     position: relative;
   }
 
@@ -69,6 +69,8 @@
     margin-bottom: 1.5rem;
     opacity: 0;
     animation: fadeUp 0.8s ease forwards 0.2s;
+    position: relative;
+    z-index: 1;
   }
 
   .hero-name {
@@ -80,6 +82,8 @@
     margin-bottom: 1.5rem;
     opacity: 0;
     animation: fadeUp 0.8s ease forwards 0.4s;
+    position: relative;
+    z-index: 1;
   }
 
   .hero-title {
@@ -90,14 +94,17 @@
     max-width: 28ch;
     opacity: 0;
     animation: fadeUp 0.8s ease forwards 0.6s;
+    position: relative;
+    z-index: 1;
   }
 
+  /* Right panel: about + nav anchored to bottom */
   .hero-right {
     background: var(--paper-warm);
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding: 5rem 4rem;
+    justify-content: flex-end;
+    padding: 3rem 4rem;
     border-left: 1px solid var(--rule);
   }
 
@@ -114,12 +121,12 @@
 
   .hero-intro {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(1.15rem, 1.8vw, 1.4rem);
+    font-size: clamp(1.05rem, 1.6vw, 1.3rem);
     font-weight: 400;
     font-style: italic;
     line-height: 1.75;
     color: var(--ink-soft);
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     opacity: 0;
     animation: fadeUp 0.8s ease forwards 0.7s;
   }
@@ -136,11 +143,11 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-    padding: 1.1rem 0;
+    padding: 1rem 0;
     border-top: 1px solid var(--rule);
     text-decoration: none;
     color: var(--ink);
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     font-weight: 500;
     transition: all 0.2s ease;
   }
@@ -296,10 +303,7 @@
     gap: 0.5rem;
   }
 
-  .ai-callout-label::before {
-    content: '◆';
-    font-size: 0.5rem;
-  }
+  .ai-callout-label::before { content: '◆'; font-size: 0.5rem; }
 
   .ai-callout p {
     color: var(--ink-soft) !important;
@@ -417,8 +421,8 @@
   /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
     .hero, .case-study { grid-template-columns: 1fr; }
-    .hero-left { min-height: 60vh; padding: 3rem 2rem; justify-content: flex-end; }
-    .hero-right { padding: 3rem 2rem; }
+    .hero-left { padding: 2.5rem 2rem; }
+    .hero-right { padding: 2.5rem 2rem; justify-content: flex-start; }
     .cs-meta { position: relative; height: auto; min-height: auto; padding: 3rem 2rem; }
     .cs-body { padding: 3rem 2rem; border-left: none; border-right: none; border-top: 1px solid var(--rule); }
     .case-study:nth-child(even) .cs-meta { order: 1; }
@@ -436,7 +440,7 @@
   <div class="hero-left">
     <p class="hero-eyebrow">Content Strategy Portfolio</p>
     <h1 class="hero-name">Samuel<br>Carter</h1>
-    <p class="hero-title">Senior Content Operations & Strategy Leader — Santa Clara, CA</p>
+    <p class="hero-title">Senior Content Operations &amp; Strategy Leader — Santa Clara, CA</p>
   </div>
   <div class="hero-right">
     <p class="hero-intro-label">About this work</p>
@@ -484,7 +488,6 @@
       <p>What I found was that most inconsistencies traced back to three root causes: unclear ownership at the handoff between global and regional teams, no defined compliance checkpoints for regulated content categories, and templates that left too much open to interpretation.</p>
       <p>The governance model I designed addressed each directly — establishing clear ownership structures for every stage of the content lifecycle, defining mandatory compliance checkpoints with specific criteria rather than vague guidance, and introducing a tiered template system that gave regional teams creative flexibility within tightly defined guardrails.</p>
       <p>Critically, the model was documented to be self-service. The goal: a new team member in any market could read the framework, understand how to apply it, and make the right call without escalating.</p>
-
       <div class="ai-callout">
         <p class="ai-callout-label">AI integration — Claude, ChatGPT</p>
         <p>Throughout the framework design process, I used Claude to stress-test the governance model — prompting it to surface edge cases and compliance scenarios I hadn't accounted for, then pressure-testing my ownership structures against those scenarios before presenting to stakeholders. What would have taken several rounds of human review to catch was compressed into a single afternoon of structured AI-assisted iteration. The model didn't write the framework; it helped me find the holes in it faster than I could alone.</p>
@@ -571,7 +574,6 @@
       <p>I mapped the actual content workflow from brief intake through final regional publication — not the documented process, but what was actually happening in practice. I tracked where content sat idle between stages, how long each handoff took, and what triggered the delays.</p>
       <p>What I found was a single structural flaw: the brief stage was consistently delivering content to the localization team in a format that required significant reformatting before translation could begin. Localization teams were spending the first portion of every project doing cleanup work that should have been done upstream — and because that wasn't visible to the production team, nobody had ever connected the cause to the effect.</p>
       <p>The fix was two-pronged: I redesigned the content brief template to enforce source formatting requirements before anything left production, and introduced a lightweight pre-handoff checklist that production leads completed before passing content forward — creating a visible quality gate that hadn't existed before. I brought the localization team into the design process from the start, which both improved the solution and made adoption significantly easier.</p>
-
       <div class="ai-callout">
         <p class="ai-callout-label">AI integration — Claude</p>
         <p>I used Claude to accelerate the diagnostic phase — feeding anonymized workflow descriptions and escalation patterns into the model to help identify correlations I might have missed in a manual review. The analysis confirmed my hypothesis about the handoff gap and surfaced a secondary formatting inconsistency I hadn't yet noticed, which I folded into the redesigned template. What might have taken a week of observation was validated in hours.</p>
@@ -658,7 +660,6 @@
       <p>Before writing a single word, I pushed the team to get explicit about who we were talking to at each stage of the web experience. I facilitated a working session with Product Marketing to map distinct audience segments against their specific questions, objections, and trust signals at each stage of the journey.</p>
       <p>That audience map became the strategic foundation for all content decisions: what went on which page, in what order, at what depth. It also gave the team a shared reference point when disagreements arose — instead of arguing opinions, we argued audience needs, which is a more productive conversation.</p>
       <p>I then built the content architecture — page hierarchy, content types, SEO targets — and began drafting in parallel, using a staged review process with Legal and Compliance that I had pre-negotiated to avoid the eleventh-hour bottlenecks that had derailed previous launches. When a significant scope change landed three weeks before launch, I restructured the content plan, re-prioritized the production queue, and kept the team moving without losing strategic coherence.</p>
-
       <div class="ai-callout">
         <p class="ai-callout-label">AI integration — Claude, ChatGPT</p>
         <p>I integrated AI at two points in the process: early in the audience mapping phase, using Claude to rapidly model likely objections and trust signals for each segment based on the product brief — which I then validated with the Product Marketing team — and during SEO research, using AI-assisted analysis to identify content gap opportunities that manual keyword research alone would have taken significantly longer to surface. The audience modeling work that might have taken two days of research took half a day, leaving more time for the stakeholder alignment work that required human judgment.</p>
@@ -716,7 +717,7 @@
 <footer class="footer">
   <div>
     <p class="footer-name">Samuel Carter</p>
-    <p class="footer-note">Senior Content Operations & Strategy Leader with 7+ years building content systems, leading cross-functional programs, and driving measurable outcomes at enterprise scale.</p>
+    <p class="footer-note">Senior Content Operations &amp; Strategy Leader with 7+ years building content systems, leading cross-functional programs, and driving measurable outcomes at enterprise scale.</p>
   </div>
   <div class="footer-contact">
     <a href="mailto:scart004@gmail.com">scart004@gmail.com</a>
