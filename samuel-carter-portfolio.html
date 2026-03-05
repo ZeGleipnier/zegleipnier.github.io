@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Samuel Carter — Content Strategy Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #111111;
+    --ink-soft: #444444;
+    --ink-faint: #888888;
+    --paper: #F7F4EF;
+    --paper-warm: #EDE9E2;
+    --rule: #D4CFC7;
+    --accent-1: #1A3A5C;
+    --accent-2: #8B2E00;
+    --accent-3: #1A4D35;
+    --gold: #C4973A;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    background: var(--ink);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 5rem 4rem;
+    position: relative;
+  }
+
+  .hero-left::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 40px,
+      rgba(255,255,255,0.015) 40px,
+      rgba(255,255,255,0.015) 41px
+    );
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.2s;
+  }
+
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 700;
+    color: #F7F4EF;
+    line-height: 1.05;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.4s;
+  }
+
+  .hero-title {
+    font-size: 1rem;
+    font-weight: 300;
+    color: rgba(247,244,239,0.55);
+    line-height: 1.6;
+    max-width: 28ch;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.6s;
+  }
+
+  .hero-right {
+    background: var(--paper-warm);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5rem 4rem;
+    border-left: 1px solid var(--rule);
+  }
+
+  .hero-intro-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.5s;
+  }
+
+  .hero-intro {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.15rem, 1.8vw, 1.4rem);
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.75;
+    color: var(--ink-soft);
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.7s;
+  }
+
+  .hero-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.9s;
+  }
+
+  .hero-nav a {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.1rem 0;
+    border-top: 1px solid var(--rule);
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    position: relative;
+  }
+
+  .hero-nav a:last-child { border-bottom: 1px solid var(--rule); }
+
+  .hero-nav a:hover { color: var(--accent-1); padding-left: 0.5rem; }
+
+  .nav-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--ink-faint);
+    min-width: 1.5rem;
+  }
+
+  .nav-arrow {
+    margin-left: auto;
+    font-size: 0.8rem;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .hero-nav a:hover .nav-arrow { opacity: 1; }
+
+  /* ── CASE STUDIES ── */
+  .case-study {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
+    border-top: 1px solid var(--rule);
+    position: relative;
+  }
+
+  .case-study:nth-child(even) .cs-meta { order: 2; }
+  .case-study:nth-child(even) .cs-body { order: 1; }
+
+  .cs-meta {
+    padding: 5rem 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+  }
+
+  .cs-1 .cs-meta { background: var(--accent-1); color: #F7F4EF; }
+  .cs-2 .cs-meta { background: var(--paper-warm); }
+  .cs-3 .cs-meta { background: var(--accent-3); color: #F7F4EF; }
+
+  .cs-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 8rem;
+    font-weight: 700;
+    line-height: 1;
+    opacity: 0.12;
+    margin-bottom: -2rem;
+    position: relative;
+    z-index: 0;
+  }
+
+  .cs-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cs-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cs-2 .cs-headline { color: var(--ink); }
+
+  .cs-context {
+    font-size: 0.85rem;
+    opacity: 0.7;
+    line-height: 1.7;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cs-divider {
+    width: 2.5rem;
+    height: 2px;
+    background: currentColor;
+    opacity: 0.3;
+    margin: 1.5rem 0;
+  }
+
+  .cs-body {
+    padding: 5rem 4rem;
+    border-left: 1px solid var(--rule);
+    background: var(--paper);
+    overflow-y: auto;
+  }
+
+  .cs-2 .cs-body { border-left: none; border-right: 1px solid var(--rule); }
+
+  .section-block {
+    margin-bottom: 3.5rem;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  .section-block h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+
+  .section-block p {
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  .section-block p:last-child { margin-bottom: 0; }
+
+  .callout {
+    border-left: 3px solid var(--gold);
+    padding: 1.25rem 1.5rem;
+    background: rgba(196,151,58,0.06);
+    margin: 2rem 0;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--ink);
+    line-height: 1.65;
+  }
+
+  .outcome-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1.25rem;
+  }
+
+  .outcome-card {
+    background: var(--paper-warm);
+    border: 1px solid var(--rule);
+    padding: 1.25rem;
+  }
+
+  .outcome-card-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 0.5rem;
+  }
+
+  .outcome-card-text {
+    font-size: 0.9rem;
+    color: var(--ink);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.25rem;
+  }
+
+  .skill-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    padding: 0.35rem 0.75rem;
+    border: 1px solid var(--rule);
+    color: var(--ink-soft);
+    background: transparent;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--ink);
+    color: rgba(247,244,239,0.5);
+    padding: 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    border-top: 1px solid #222;
+  }
+
+  .footer-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: #F7F4EF;
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-note {
+    font-size: 0.85rem;
+    line-height: 1.7;
+    max-width: 36ch;
+  }
+
+  .footer-contact {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+
+  .footer-contact a {
+    color: var(--gold);
+    text-decoration: none;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    transition: opacity 0.2s;
+  }
+
+  .footer-contact a:hover { opacity: 0.7; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero, .case-study { grid-template-columns: 1fr; }
+    .hero-left { min-height: 60vh; padding: 3rem 2rem; justify-content: flex-end; }
+    .hero-right { padding: 3rem 2rem; }
+    .cs-meta { position: relative; height: auto; min-height: auto; padding: 3rem 2rem; }
+    .cs-body { padding: 3rem 2rem; border-left: none; border-right: none; border-top: 1px solid var(--rule); }
+    .case-study:nth-child(even) .cs-meta { order: 1; }
+    .case-study:nth-child(even) .cs-body { order: 2; }
+    .cs-2 .cs-body { border-right: none; }
+    .outcome-grid { grid-template-columns: 1fr; }
+    .footer { grid-template-columns: 1fr; padding: 3rem 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Content Strategy Portfolio</p>
+    <h1 class="hero-name">Samuel<br>Carter</h1>
+    <p class="hero-title">Senior Content Operations & Strategy Leader — Santa Clara, CA</p>
+  </div>
+  <div class="hero-right">
+    <p class="hero-intro-label">About this work</p>
+    <p class="hero-intro">"I build the systems that make content scale — and lead the teams that make them work."</p>
+    <nav class="hero-nav">
+      <a href="#case-1">
+        <span class="nav-num">01</span>
+        Global Content Governance at Scale
+        <span class="nav-arrow">↓</span>
+      </a>
+      <a href="#case-2">
+        <span class="nav-num">02</span>
+        Fixing a Broken Production Workflow
+        <span class="nav-arrow">↓</span>
+      </a>
+      <a href="#case-3">
+        <span class="nav-num">03</span>
+        High-Stakes Product Launch Web Content
+        <span class="nav-arrow">↓</span>
+      </a>
+    </nav>
+  </div>
+</section>
+
+<!-- ── CASE STUDY 1 ── -->
+<section class="case-study cs-1" id="case-1">
+  <div class="cs-meta">
+    <div class="cs-number">01</div>
+    <p class="cs-tag">Hogarth · Enterprise Client (Anonymized) · 2024–2025</p>
+    <h2 class="cs-headline">Building a Global Content Governance System from the Ground Up</h2>
+    <div class="cs-divider"></div>
+    <p class="cs-context">Content operations · Framework design · Cross-functional leadership · 100+ global locales</p>
+  </div>
+  <div class="cs-body">
+
+    <div class="section-block reveal">
+      <p class="section-label">The situation</p>
+      <h3>A global content engine with no rulebook</h3>
+      <p>When I joined the engagement at Hogarth, our enterprise client was managing content across more than 100 global markets — but without a unified system for doing it. Each locale operated with its own interpretation of brand standards. Approval workflows differed by region. Compliance checkpoints were inconsistently applied. And because there was no shared language for how content decisions got made, every ambiguous situation escalated — to me, to the client, to whoever happened to be in the room.</p>
+      <p>The output was inconsistent. The process was slow. And the team was spending significant time on decisions that a well-designed system should have made automatically.</p>
+    </div>
+
+    <div class="callout reveal">
+      "The problem wasn't effort — the team was working hard. The problem was that there was no framework for that effort to flow through."
+    </div>
+
+    <div class="section-block reveal">
+      <p class="section-label">My role</p>
+      <h3>Architect and implementer — not just executor</h3>
+      <p>I owned this initiative end-to-end. That meant auditing the existing state across markets, identifying where the gaps were creating the most friction, designing the governance model, building the documentation and toolkits, and then leading the organizational work of getting distributed teams to actually adopt it.</p>
+      <p>I was not handed a framework and asked to roll it out. I built it from a blank page.</p>
+    </div>
+
+    <div class="section-block reveal">
+      <p class="section-label">The approach</p>
+      <h3>Design for the edge cases, not just the easy ones</h3>
+      <p>I started by mapping where decisions were actually getting stuck — not where people thought they were getting stuck, but where the real friction lived in the day-to-day workflow. I interviewed content leads across regions, reviewed audit trails in the CMS, and catalogued recurring escalation patterns.</p>
+      <p>What I found was that most inconsistencies traced back to three root causes: unclear ownership at the handoff between global and regional teams, no defined compliance checkpoints for regulated content categories, and templates that left too much open to interpretation.</p>
+      <p>The governance model I designed addressed each of these directly. It established clear ownership structures for every stage of the content lifecycle, defined mandatory compliance checkpoints with specific criteria — not vague guidance — and introduced a tiered template system that gave regional teams creative flexibility within tightly defined guardrails.</p>
+      <p>Critically, the model was documented in a way that made it self-service. The goal was that a new team member in any market could read the framework, understand how to apply it, and make the right call without needing to ask me.</p>
+    </div>
+
+    <div class="section-block reveal">
+      <p class="section-label">The outcomes</p>
+      <h3>Fewer escalations. Faster cycles. Consistent output.</h3>
+      <div class="outcome-grid">
+        <div class="outcome-card">
+          <p class="outcome-card-label">Escalation reduction</p>
+          <p class="outcome-card-text">Recurring cross-regional compliance flags dropped significantly once ownership and checkpoint criteria were clearly defined</p>
+        </div>
+        <div class="outcome-card">
+          <p class="outcome-card-label">Onboarding speed</p>
+          <p class="outcome-card-text">New market onboarding time shortened as teams could orient themselves using the framework rather than relying on institutional knowledge</p>
+        </div>
+        <div class="outcome-card">
+          <p class="outcome-card-label">Review cycle clarity</p>
+          <p class="outcome-card-text">Content review rounds became more purposeful — fewer rounds spent on structural issues that governance now prevented upstream</p>
+        </div>
+        <div class="outcome-card">
+          <p class="outcome-card-label">Team confidence</p>
+          <p class="outcome-card-text">Regional leads reported higher confidence in making autonomous content decisions within the defined framework</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-block reveal">
+      <p class="section-label">Skills demonstrated</p>
+      <div class="skill-tags">
+        <span class="skill-tag">Content governance</span>
+        <span class="skill-tag">Framework design</span>
+        <span class="skill-tag">SOP development</span>
+        <span class="skill-tag">Cross-functional leadership</span>
+        <span class="skill-tag">Global localization</span>
+        <span class="skill-tag">Change management</span>
+        <span class="skill-tag">Adobe Experience Manager</span>
+        <span class="skill-tag">Stakeholder alignment</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── CASE STUDY 2 ── -->
+<section class="case-study cs-2" id="case-2">
+  <div class="cs-meta">
+    <div class="cs-number">02</div>
+    <p class="cs-tag">Hogarth · Enterprise Client (Anonymized) · 2024–2025</p>
+    <h2 class="cs-headline">Diagnosing and Fixing a Broken Content Production Workflow</h2>
+    <div class="cs-divider"></div>
+    <p class="cs-context">Process improvement · Bottleneck analysis · Workflow redesign · Cross-team coordination</p>
+  </div>
+  <div class="cs-body">
+
+    <div class="section-block reveal">
+      <p class="section-label">The situation</p>
+      <h3>A bottleneck nobody had named — but everyone felt</h3>
+      <p>Midway through the Hogarth engagement, a pattern became impossible to ignore: content was consistently arriving late to the localization team, which was creating a downstream cascade that pushed regional publication dates and frustrated client stakeholders. The issue was being treated as a capacity problem — the assumption was that the team simply needed more bandwidth.</p>
+      <p>I suspected the real problem was structural. So I took a closer look.</p>
+    </div>
+
+    <div class="callout reveal">
+      "It wasn't a people problem. It was a handoff problem — and handoff problems are design problems."
+    </div>
+
+    <div class="section-block reveal">
+      <p class="section-label">My role</p>
+      <h3>Diagnosis, design, and implementation</h3>
+      <p>I led the full process improvement initiative — from root cause analysis through stakeholder alignment to workflow redesign and adoption. I was not asked to do this; I identified the need, proposed the investigation, and owned the outcome.</p>
+    </div>
+
+    <div class="section-block reveal">
+      <p class="section-label">The approach</p>
+      <h3>Follow the work, not the assumptions</h3>
+      <p>I mapped the actual content workflow from brief intake through final regional publication — not the documented process, but what was actually happening in practice. I tracked where content sat idle between stages, how long each handoff took, and what triggered the delays.</p>
+      <p>What I found was a single structural flaw: the brief stage was consistently delivering content to the localization team in a format that required significant reformatting before translation could begin. Localization teams were spending the first portion of every project doing cleanup work that should have been done upstream — and because that wasn't visible to the production team, nobody had ever connected the cause to the effect.</p>
+      <p>The fix was two-pronged. First, I redesigned the content brief template to enforce source formatting requirements before anything left production — making the correct format the path of least resistance. Second, I introduced a lightweight pre-handoff checklist that production leads completed before passing content forward, creating a visible quality gate that hadn't existed before.</p>
+      <p>I brought the localization team into the design process from the start, which both improved the solution and made adoption significantly easier — they had shaped it, so they trusted it.</p>
+    </div>
+
+    <div class="section-block reveal">
+      <p class="section-label">The outcomes</p>
+      <h3>A structural fix with compounding benefits</h3>
+      <div class="outcome-grid">
+        <div class="outcome-card">
+          <p class="outcome-card-label">Handoff quality</p>
+          <p class="outcome-card-text">Reformatting delays at the localization stage were eliminated, recovering meaningful time in each content cycle</p>
+        </div>
+        <div class="outcome-card">
+          <p class="outcome-card-label">Downstream reliability</p>
+          <p class="outcome-card-text">Regional publication dates became more predictable as the upstream fix stabilized the full pipeline</p>
+        </div>
+        <div class="outcome-card">
+          <p class="outcome-card-label">Client confidence</p>
+          <p class="outcome-card-text">Stakeholder visibility into delivery timelines improved as the process became more consistent and reportable</p>
+        </div>
+        <div class="outcome-card">
+          <p class="outcome-card-label">Team adoption</p>
+          <p class="outcome-card-text">Cross-team buy-in was high because both production and localization teams were involved in designing the solution</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-block reveal">
+      <p class="section-label">Skills demonstrated</p>
+      <div class="skill-tags">
+        <span class="skill-tag">Process improvement</span>
+        <span class="skill-tag">Root cause analysis</span>
+        <span class="skill-tag">Workflow redesign</span>
+        <span class="skill-tag">Stakeholder facilitation</span>
+        <span class="skill-tag">Cross-functional coordination</span>
+        <span class="skill-tag">Template design</span>
+        <span class="skill-tag">Change adoption</span>
+        <span class="skill-tag">Content operations</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── CASE STUDY 3 ── -->
+<section class="case-study cs-3" id="case-3">
+  <div class="cs-meta">
+    <div class="cs-number">03</div>
+    <p class="cs-tag">SoFi Technologies · B2B Financial Product · 2022–2024</p>
+    <h2 class="cs-headline">Leading Web Content Strategy for a High-Stakes B2B Product Launch</h2>
+    <div class="cs-divider"></div>
+    <p class="cs-context">Product launch · Web content strategy · Cross-functional leadership · SEO · Deadline pressure</p>
+  </div>
+  <div class="cs-body">
+
+    <div class="section-block reveal">
+      <p class="section-label">The situation</p>
+      <h3>A compressed timeline, a complex product, multiple audiences</h3>
+      <p>At SoFi, product launches moved fast — and the web content had to move faster. For one of the more complex B2B product launches I led, the challenge wasn't just volume (landing pages, partner pages, campaign content, SEO copy) — it was that the product served meaningfully different audiences with different levels of sophistication, different questions, and different conversion triggers.</p>
+      <p>The timeline was tight. The stakeholder list was long. And the content had to be right — in a regulated financial environment, accuracy isn't optional.</p>
+    </div>
+
+    <div class="callout reveal">
+      "The hardest part wasn't the writing. It was holding the strategic thread across six teams with six different definitions of done."
+    </div>
+
+    <div class="section-block reveal">
+      <p class="section-label">My role</p>
+      <h3>Content strategy lead and cross-functional coordinator</h3>
+      <p>I owned the web content strategy for the launch end-to-end — from defining the content architecture and user journey across audience segments, through writing and editing, through cross-functional review, through deployment and QA. I was the connective tissue between Product Marketing, Design, Engineering, Legal, and Data Science throughout the process.</p>
+    </div>
+
+    <div class="section-block reveal">
+      <p class="section-label">The approach</p>
+      <h3>Audience clarity first, content second</h3>
+      <p>Before writing a single word, I pushed the team to get explicit about who we were talking to at each stage of the web experience — something that sounds obvious but rarely gets done rigorously enough in practice. I facilitated a working session with Product Marketing to map the distinct audience segments (financial institution partners, enterprise procurement, end-user decision-makers) against their specific questions, objections, and trust signals at each stage of the journey.</p>
+      <p>That audience map became the strategic foundation for all content decisions: what went on which page, in what order, at what depth. It also gave the team a shared reference point for the inevitable disagreements about what the content should say — instead of arguing opinions, we argued audience needs, which is a much more productive conversation.</p>
+      <p>I then built the content architecture — page hierarchy, content types, SEO targets — and began drafting in parallel, using a staged review process with Legal and Compliance that I had pre-negotiated to avoid the eleventh-hour bottlenecks that had derailed previous launches.</p>
+      <p>When a significant scope change landed three weeks before launch — a new audience segment added to the brief — I restructured the content plan, re-prioritized the production queue, and kept the team moving without losing the strategic coherence of the overall experience.</p>
+    </div>
+
+    <div class="section-block reveal">
+      <p class="section-label">The outcomes</p>
+      <h3>On time, on strategy, measurably effective</h3>
+      <div class="outcome-grid">
+        <div class="outcome-card">
+          <p class="outcome-card-label">Launch delivery</p>
+          <p class="outcome-card-text">Full web content suite delivered on schedule despite a mid-project scope expansion adding a third audience segment</p>
+        </div>
+        <div class="outcome-card">
+          <p class="outcome-card-label">SEO performance</p>
+          <p class="outcome-card-text">Target keyword pages indexed and began ranking within the first month; SEO strategy informed by audience research performed above baseline</p>
+        </div>
+        <div class="outcome-card">
+          <p class="outcome-card-label">Partner engagement</p>
+          <p class="outcome-card-text">Partner-facing pages supported a campaign that drove meaningful inbound interest from target B2B segments in the launch quarter</p>
+        </div>
+        <div class="outcome-card">
+          <p class="outcome-card-label">Process improvement</p>
+          <p class="outcome-card-text">Pre-negotiated Legal review process reduced last-minute content changes and became a template for subsequent launches</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-block reveal">
+      <p class="section-label">Skills demonstrated</p>
+      <div class="skill-tags">
+        <span class="skill-tag">Web content strategy</span>
+        <span class="skill-tag">User journey design</span>
+        <span class="skill-tag">Audience segmentation</span>
+        <span class="skill-tag">Product launch coordination</span>
+        <span class="skill-tag">SEO strategy</span>
+        <span class="skill-tag">Cross-functional leadership</span>
+        <span class="skill-tag">Stakeholder management</span>
+        <span class="skill-tag">Regulated content</span>
+        <span class="skill-tag">Scope management</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="footer">
+  <div>
+    <p class="footer-name">Samuel Carter</p>
+    <p class="footer-note">Senior Content Operations & Strategy Leader with 7+ years building content systems, leading cross-functional programs, and driving measurable outcomes at enterprise scale.</p>
+  </div>
+  <div class="footer-contact">
+    <a href="mailto:scart004@gmail.com">scart004@gmail.com</a>
+    <a href="tel:4084825071">408-482-5071</a>
+    <a href="https://www.linkedin.com/in/samuel-carter-0a97a197/" target="_blank">linkedin.com/in/samuel-carter-0a97a197</a>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
